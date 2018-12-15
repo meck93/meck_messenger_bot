@@ -1,3 +1,3 @@
-# Facebook Messenger Chatbot
+# Meck Messenger Chatbot
 
-A node.js server app which acts as Facebook Messenger Chatbot.
+A node.js server app which interacts with my personal Facebook Page and it's messenger app.
