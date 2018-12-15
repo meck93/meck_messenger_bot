@@ -46,6 +46,7 @@ function callSendAPI(sender_psid, response) {
 // handles message events
 export function handleMessage(sender_psid, received_message) {
   let response;
+  console.log(`Facebook App ID: ${myID} - Sender PSID: ${sender_psid}`);
 
   // Checks if the message contains text
   if (received_message.text) {
@@ -86,8 +87,25 @@ export function handleMessage(sender_psid, received_message) {
         }
       }
     };
+  } else if (received_message.text && sender_psid !== process.env.FB_APP_ID) {
+    forwardMessage(sender_psid, received_message);
   }
 
   // Send the response message
   callSendAPI(sender_psid, response);
+}
+
+function forwardMessage(sender_psid, received_message) {
+  request(
+    {
+      url: "",
+      method: "POST",
+      body: { message: received_message.text },
+      headers: { "User-Agent": "request" },
+      json: true
+    },
+    function(error, response, body) {
+      callSendAPI(sender_psid, response.body);
+    }
+  );
 }
