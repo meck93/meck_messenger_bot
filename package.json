@@ -5,7 +5,9 @@
   "scripts": {
     "serve": "nodemon --exec babel-node src/server.js",
     "build": "babel src --out-dir dist",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "heroku-prebuild": "babel src --out-dir dist",
+    "heroku-postbuild": ""
   },
   "dependencies": {
     "body-parser": "^1.18.3",

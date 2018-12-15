@@ -23,5 +23,6 @@ coverage
 # Benchmarking
 benchmarks/graphs
 
-# exclude environment variables
+# exclude environment variables and build folder
 .env
+dist/*

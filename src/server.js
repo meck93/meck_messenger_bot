@@ -21,7 +21,7 @@ app.use(cors());
 
 // Index route
 app.get("/", (req, res) => {
-  res.send("Hello world, I am a chat bot");
+  res.send("Hello world, I am a chat bot for facebook messenger.");
 });
 
 // for facebook verification
