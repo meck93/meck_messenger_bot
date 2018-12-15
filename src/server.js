@@ -3,7 +3,7 @@ import "@babel/polyfill";
 import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
-import { handleMessage, handlePostback } from "./handlers.js";
+import { handleMessage, forwardMessage, handlePostback } from "./handlers.js";
 
 // load node environment variables
 require("dotenv").config();

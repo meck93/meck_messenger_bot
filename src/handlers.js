@@ -95,7 +95,7 @@ export function handleMessage(sender_psid, received_message) {
   callSendAPI(sender_psid, response);
 }
 
-function forwardMessage(sender_psid, received_message) {
+export function forwardMessage(sender_psid, received_message) {
   request(
     {
       url: "https://pytorch-chatbot.herokuapp.com/prediction",
