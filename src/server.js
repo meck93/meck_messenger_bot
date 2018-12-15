@@ -2,8 +2,8 @@ import "@babel/polyfill";
 
 import express from "express";
 import bodyParser from "body-parser";
-import request from "request";
 import cors from "cors";
+import { handleMessage, handlePostback } from "./handlers.js";
 
 // load node environment variables
 require("dotenv").config();
@@ -16,7 +16,7 @@ const app = express();
 
 // basic config
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 // Index route
@@ -48,30 +48,6 @@ app.get("/webhook", (req, res) => {
   }
 });
 
-function sendTextMessage(sender, text) {
-  let messageData = { text: text };
-
-  request(
-    {
-      url: "https://graph.facebook.com/v3.2/me/messages",
-      qs: { access_token: process.env.FB_ACCESS_TOKEN },
-      method: "POST",
-      json: {
-        recipient: { id: sender },
-        message: messageData
-      }
-    },
-
-    function(error, response, body) {
-      if (error) {
-        console.log("Error sending messages: ", error);
-      } else if (response.body.error) {
-        console.log("Error: ", response.body.error);
-      }
-    }
-  );
-}
-
 // Creates the endpoint for our webhook
 app.post("/webhook", (req, res) => {
   let body = req.body;
@@ -85,14 +61,14 @@ app.post("/webhook", (req, res) => {
       let webhook_event = entry.messaging[0];
       console.log(webhook_event);
 
+      // Get the sender PSID
       let sender = webhook_event.sender.id;
+      console.log("Sender PSID: " + sender);
 
-      if (webhook_event.message && webhook_event.message.text) {
-        let text = webhook_event.message.text;
-        sendTextMessage(
-          sender,
-          "Text received, echo: " + text.substring(0, 200)
-        );
+      if (webhook_event.message) {
+        handleMessage(sender, webhook_event.message);
+      } else if (webhook_event.postback) {
+        handlePostback(sender_psid, webhook_event.postback);
       }
     });
 
