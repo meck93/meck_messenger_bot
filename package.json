@@ -24,5 +24,13 @@
     "nodemon": "^1.18.7"
   },
   "author": "Moritz Eck - moritz.eck@gmail.com",
-  "license": "MIT"
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/meck93/meck_messenger_bot/issues"
+  },
+  "homepage": "https://github.com/meck93/meck_messenger_bot",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meck93/meck_messenger_bot.git"
+  }
 }

@@ -9,23 +9,23 @@ import cors from "cors";
 require("dotenv").config();
 
 const hostname = "0.0.0.0";
-const port = process.env.PORT || 6006;
+const port = process.env.PORT || 8080;
 
 // create new express app
 const app = express();
 
 // basic config
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors);
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cors());
 
 // Index route
-app.get("/", function(req, res) {
+app.get("/", (req, res) => {
   res.send("Hello world, I am a chat bot");
 });
 
 // for facebook verification
-app.get("/webhook/", function(req, res) {
+app.get("/webhook/", (req, res) => {
   if (req.query["hub.verify_token"] === process.env.FB_URL_TOKEN) {
     res.send(req.query["hub.challenge"]);
   }
@@ -35,7 +35,8 @@ app.get("/webhook/", function(req, res) {
 // run server and listen for incoming requests
 app.listen(port, () => {
   console.log(
-    `Running stuff on http://${hostname}:${port}. 
-     NODE_ENV: ${process.env.NODE_ENV}.`
+    `Running stuff on http://${hostname}:${port}. NODE_ENV: ${
+      process.env.NODE_ENV
+    }.`
   );
 });
