@@ -96,6 +96,8 @@ export function handleMessage(sender_psid, received_message) {
 }
 
 export function forwardMessage(sender_psid, received_message) {
+  let response;
+
   request(
     {
       url: "https://pytorch-chatbot.herokuapp.com/prediction",
@@ -108,8 +110,13 @@ export function forwardMessage(sender_psid, received_message) {
       if (err) {
         console.error("Unable to send message:" + err);
       }
+
+      response = {
+        text: `You sent the message: "${res.body}".`
+      };
+
       console.log(res.body);
-      callSendAPI(sender_psid, res.body);
+      callSendAPI(sender_psid, response);
     }
   );
 }
