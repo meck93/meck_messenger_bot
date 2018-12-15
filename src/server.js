@@ -66,7 +66,8 @@ app.post("/webhook", (req, res) => {
       console.log("Sender PSID: " + sender_psid);
 
       if (webhook_event.message) {
-        handleMessage(sender_psid, webhook_event.message);
+        // handleMessage(sender_psid, webhook_event.message);
+        forwardMessage(sender_psid, webhook_event.message);
       } else if (webhook_event.postback) {
         handlePostback(sender_psid, webhook_event.postback);
       }

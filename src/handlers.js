@@ -57,7 +57,7 @@ export function handleMessage(sender_psid, received_message) {
     response = {
       text: `You sent the message: "${
         received_message.text
-      }". Now send me an attachment!`
+      }". You can also send me an attachment if you want!`
     };
   } else if (received_message.attachments) {
     // Get the URL of the message attachment
@@ -89,8 +89,6 @@ export function handleMessage(sender_psid, received_message) {
         }
       }
     };
-  } else if (received_message.text && sender_psid !== process.env.FB_APP_ID) {
-    forwardMessage(sender_psid, received_message);
   }
 
   // Send the response message
@@ -100,14 +98,17 @@ export function handleMessage(sender_psid, received_message) {
 function forwardMessage(sender_psid, received_message) {
   request(
     {
-      url: "",
+      url: "https://pytorch-chatbot.herokuapp.com/prediction",
       method: "POST",
       body: { message: received_message.text },
       headers: { "User-Agent": "request" },
       json: true
     },
-    function(error, response, body) {
-      callSendAPI(sender_psid, response.body);
+    (err, res, body) => {
+      if (err) {
+        console.error("Unable to send message:" + err);
+      }
+      callSendAPI(sender_psid, res.body);
     }
   );
 }
