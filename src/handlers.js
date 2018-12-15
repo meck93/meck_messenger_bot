@@ -46,7 +46,9 @@ function callSendAPI(sender_psid, response) {
 // handles message events
 export function handleMessage(sender_psid, received_message) {
   let response;
-  console.log(`Facebook App ID: ${myID} - Sender PSID: ${sender_psid}`);
+  console.log(
+    `Facebook App ID: ${process.env.FB_APP_ID}, Sender PSID: ${sender_psid}`
+  );
 
   // Checks if the message contains text
   if (received_message.text) {
