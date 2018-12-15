@@ -63,7 +63,9 @@ app.post("/webhook", (req, res) => {
 
       // Get the sender PSID
       let sender_psid = webhook_event.sender.id;
-      console.log("Sender PSID: " + sender_psid);
+      console.log(
+        `FB App ID: ${process.env.FB_APP_ID}, Sender PSID: ${sender_psid}`
+      );
 
       if (webhook_event.message) {
         // handleMessage(sender_psid, webhook_event.message);
