@@ -108,6 +108,7 @@ export function forwardMessage(sender_psid, received_message) {
       if (err) {
         console.error("Unable to send message:" + err);
       }
+      console.log(res.body);
       callSendAPI(sender_psid, res.body);
     }
   );
