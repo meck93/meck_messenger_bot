@@ -28,11 +28,10 @@ function callSendAPI(sender_psid, response) {
   };
 
   // Send the HTTP request to the Messenger Platform
-  request(
+  request.post(
     {
       uri: "https://graph.facebook.com/v3.2/me/messages",
       qs: { access_token: process.env.FB_ACCESS_TOKEN },
-      method: "POST",
       json: request_body
     },
     (err, res, body) => {
@@ -93,10 +92,13 @@ export function handleMessage(sender_psid, received_message) {
 }
 
 export function forwardMessage(sender_psid, received_message) {
-  request(
+  let response;
+
+  console.log(`Message received: ${received_message.text}`);
+
+  request.post(
     {
       url: "https://pytorch-chatbot.herokuapp.com/prediction",
-      method: "POST",
       body: { message: received_message.text },
       headers: { "User-Agent": "request" },
       json: true
@@ -107,10 +109,11 @@ export function forwardMessage(sender_psid, received_message) {
       }
 
       // create the response message for the facebook messenger
-      let response = { text: `${res.body}` };
-
-      console.log(res.body);
-      callSendAPI(sender_psid, response);
+      response = { text: `${res.body}` };
+      console.log(`Answer: ${res.body}`);
     }
   );
+
+  // Send the response message
+  callSendAPI(sender_psid, response);
 }
