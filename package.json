@@ -1,13 +1,17 @@
 {
   "name": "fb_messenger_bot",
   "description": "",
+  "engines": {
+    "node": "10.10.0",
+    "npm": "6.4.1"
+  },
   "main": "server.js",
   "scripts": {
     "serve": "nodemon --exec babel-node src/server.js",
     "build": "babel src --out-dir dist",
     "start": "node dist/server.js",
-    "heroku-prebuild": "babel src --out-dir dist",
-    "heroku-postbuild": ""
+    "heroku-prebuild": "npm install && babel src --out-dir dist",
+    "heroku-postbuild": "echo this is a post build message"
   },
   "dependencies": {
     "body-parser": "^1.18.3",

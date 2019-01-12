@@ -111,9 +111,9 @@ export function forwardMessage(sender_psid, received_message) {
       // create the response message for the facebook messenger
       response = { text: `${res.body}` };
       console.log(`Answer: ${res.body}`);
+
+      // Send the response message
+      callSendAPI(sender_psid, response);
     }
   );
-
-  // Send the response message
-  callSendAPI(sender_psid, response);
 }
