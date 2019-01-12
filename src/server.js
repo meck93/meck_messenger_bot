@@ -13,7 +13,6 @@ const port = process.env.PORT || 8080;
 
 // create new express app
 const app = express();
-let counter = 0;
 
 // basic config
 app.use(bodyParser.json());
@@ -52,8 +51,6 @@ app.get("/webhook", (req, res) => {
 // Creates the endpoint for our webhook
 app.post("/webhook", (req, res) => {
   let body = req.body;
-  console.log(req.url);
-  console.log(req.hostname);
 
   // Checks this is an event from a page subscription
   if (body.object === "page") {
@@ -62,8 +59,7 @@ app.post("/webhook", (req, res) => {
       // Gets the message. entry.messaging is an array, but
       // will only ever contain one message, so we get index 0
       let webhook_event = entry.messaging[0];
-      console.log(`Count: ${counter++}`);
-      // console.log(webhook_event);
+      console.log(webhook_event);
 
       // Get the sender PSID
       let sender_psid = webhook_event.sender.id;
@@ -72,15 +68,13 @@ app.post("/webhook", (req, res) => {
         `FB App ID: ${process.env.FB_APP_ID}, Sender PSID: ${sender_psid}`
       );
 
-      console.log(`Message is echo: ${webhook_event.message.is_echo}`);
-
       if (webhook_event.message) {
         // handleMessage(sender_psid, webhook_event.message);
         forwardMessage(sender_psid, webhook_event.message);
       } else if (webhook_event.postback) {
-        // handlePostback(sender_psid, webhook_event.postback);
+        handlePostback(sender_psid, webhook_event.postback);
       } else {
-        Console.log("unhandled webhook event!");
+        console.log("Unhandled webhook event!");
       }
     });
 
