@@ -1,10 +1,6 @@
 {
   "name": "fb_messenger_bot",
   "description": "",
-  "engines": {
-    "node": "10.10.0",
-    "npm": "6.4.1"
-  },
   "main": "server.js",
   "scripts": {
     "serve": "nodemon --exec babel-node src/server.js",
@@ -22,12 +18,12 @@
     "request": "^2.88.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.6.0",
-    "@babel/core": "^7.6.0",
-    "@babel/node": "^7.6.1",
+    "@babel/cli": "^7.6.2",
+    "@babel/core": "^7.6.2",
+    "@babel/node": "^7.6.2",
     "@babel/polyfill": "^7.6.0",
-    "@babel/preset-env": "^7.6.0",
-    "nodemon": "^1.18.7"
+    "@babel/preset-env": "^7.6.2",
+    "nodemon": "^1.19.2"
   },
   "author": "Moritz Eck - moritz.eck@gmail.com",
   "license": "MIT",
