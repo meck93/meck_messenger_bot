@@ -22,7 +22,7 @@
     "@babel/core": "^7.6.2",
     "@babel/node": "^7.6.2",
     "@babel/polyfill": "^7.6.0",
-    "@babel/preset-env": "^7.6.2",
+    "@babel/preset-env": "^7.6.3",
     "nodemon": "^1.19.3"
   },
   "author": "Moritz Eck - moritz.eck@gmail.com",
