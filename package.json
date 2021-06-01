@@ -18,7 +18,7 @@
     "request": "^2.88.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.13.16",
+    "@babel/cli": "^7.14.3",
     "@babel/core": "^7.14.3",
     "@babel/node": "^7.14.2",
     "@babel/polyfill": "^7.12.1",
