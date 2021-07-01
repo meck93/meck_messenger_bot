@@ -23,7 +23,7 @@
     "@babel/node": "^7.14.7",
     "@babel/polyfill": "^7.12.1",
     "@babel/preset-env": "^7.14.7",
-    "nodemon": "^1.19.3"
+    "nodemon": "^2.0.9"
   },
   "author": "Moritz Eck - moritz.eck@gmail.com",
   "license": "MIT",
